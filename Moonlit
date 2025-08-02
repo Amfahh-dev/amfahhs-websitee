@@ -45,6 +45,16 @@
             color: inherit;
         }
 
+        /* Page Transition */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
         /* Utility Classes */
         .container {
             width: 90%;
@@ -173,6 +183,7 @@
             color: var(--midnight-blue);
             display: flex;
             align-items: center;
+            cursor: pointer;
         }
 
         .logo-icon {
@@ -523,6 +534,200 @@
             font-weight: 600;
         }
 
+        /* Phase Content */
+        .phase-content {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .phase-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .phase-content-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--violet);
+        }
+
+        .phase-content-desc {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .phase-content-tips {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .phase-content-tips h4 {
+            margin: 1.5rem 0 0.5rem;
+            color: var(--midnight-blue);
+        }
+
+        /* Resources Page */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .resource-card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.2);
+        }
+
+        .resource-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .resource-content {
+            padding: 25px;
+        }
+
+        .resource-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: var(--lavender);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            color: var(--violet);
+        }
+
+        .resource-desc {
+            margin-bottom: 1.5rem;
+            color: var(--midnight-blue);
+            opacity: 0.8;
+        }
+
+        /* Community Page */
+        .community-posts {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .post {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--lavender);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .post-user {
+            font-weight: 600;
+        }
+
+        .post-date {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .post-action:hover {
+            color: var(--violet);
+        }
+
+        .community-form {
+            max-width: 800px;
+            margin: 3rem auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            border-radius: var(--radius);
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--violet);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
         /* Responsive Styles */
         @media (max-width: 1200px) {
             .hero-title {
@@ -659,118 +864,368 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">
+                <div class="logo" id="home-link">
                     <span class="logo-icon"></span>
                     Lunar Wellness
-                </a>
+                </div>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#phases">Moon Phases</a></li>
-                    <li><a href="#resources">Starlight Resources</a></li>
-                    <li><a href="#community">Cosmic Community</a></li>
-                    <li><a href="#tools">Moon Tools</a></li>
+                    <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="phases">Moon Phases</a></li>
+                    <li><a href="#" class="nav-link" data-page="resources">Starlight Resources</a></li>
+                    <li><a href="#" class="nav-link" data-page="community">Cosmic Community</a></li>
                 </ul>
                 <button class="mobile-menu-btn">☾</button>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text fade-in">
-                    <h1 class="hero-title">Find Your Moonlight</h1>
-                    <p class="hero-subtitle">A celestial sanctuary for mental wellness, guided by the moon's gentle phases and cosmic wisdom.</p>
-                    <div class="hero-buttons">
-                        <a href="#phases" class="btn btn-primary">Explore Phases</a>
-                        <a href="#community" class="btn btn-outline">Join Our Constellation</a>
+    <!-- Home Page -->
+    <div class="page active" id="home-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text fade-in">
+                        <h1 class="hero-title">Find Your Moonlight</h1>
+                        <p class="hero-subtitle">A celestial sanctuary for mental wellness, guided by the moon's gentle phases and cosmic wisdom.</p>
+                        <div class="hero-buttons">
+                            <a href="#" class="btn btn-primary" data-page="phases">Explore Phases</a>
+                            <a href="#" class="btn btn-outline" data-page="community">Join Our Constellation</a>
+                        </div>
+                        <div class="mood-selector fade-in delay-1">
+                            <p class="mood-title">Which moon phase matches your mood today?</p>
+                            <div class="mood-options">
+                                <div class="mood-option" data-mood="new-moon">🌑</div>
+                                <div class="mood-option" data-mood="waxing">🌓</div>
+                                <div class="mood-option active" data-mood="full">🌕</div>
+                                <div class="mood-option" data-mood="waning">🌗</div>
+                                <div class="mood-option" data-mood="eclipse">🌘</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mood-selector fade-in delay-1">
-                        <p class="mood-title">Which moon phase matches your mood today?</p>
-                        <div class="mood-options">
-                            <div class="mood-option" data-mood="new-moon">🌑</div>
-                            <div class="mood-option" data-mood="waxing">🌓</div>
-                            <div class="mood-option active" data-mood="full">🌕</div>
-                            <div class="mood-option" data-mood="waning">🌗</div>
-                            <div class="mood-option" data-mood="eclipse">🌘</div>
+                    <div class="hero-image fade-in delay-2">
+                        <div class="moon-visual"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section features">
+            <div class="container">
+                <h2 class="section-title fade-in">Celestial Guidance</h2>
+                <p class="section-subtitle fade-in delay-1">Harness the moon's energy to navigate your mental health journey</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🌙</div>
+                        <h3 class="feature-title">Lunar Wisdom</h3>
+                        <p class="feature-desc">Discover how moon phases mirror emotional cycles and learn to work with their energy.</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in delay-1">
+                        <div class="feature-icon">✨</div>
+                        <h3 class="feature-title">Starlight Strategies</h3>
+                        <p class="feature-desc">Evidence-based techniques framed through celestial metaphors for better recall.</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in delay-2">
+                        <div class="feature-icon">🌌</div>
+                        <h3 class="feature-title">Cosmic Connections</h3>
+                        <p class="feature-desc">A supportive community that orbits together through life's challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Moon Phases Page -->
+    <div class="page" id="phases-page">
+        <section class="section" style="background-color: var(--lavender);">
+            <div class="container">
+                <h2 class="section-title fade-in">Moon Phase Guidance</h2>
+                <p class="section-subtitle fade-in delay-1">Your emotional journey through the lunar cycle</p>
+                
+                <div class="phases-nav fade-in delay-2">
+                    <div class="phase-link active" data-phase="new-moon">
+                        <div class="phase-icon">🌑</div>
+                        <span class="phase-label">New Moon</span>
+                        <small>Reflection</small>
+                    </div>
+                    <div class="phase-link" data-phase="waxing">
+                        <div class="phase-icon">🌓</div>
+                        <span class="phase-label">Waxing</span>
+                        <small>Growth</small>
+                    </div>
+                    <div class="phase-link" data-phase="full-moon">
+                        <div class="phase-icon">🌕</div>
+                        <span class="phase-label">Full Moon</span>
+                        <small>Clarity</small>
+                    </div>
+                    <div class="phase-link" data-phase="waning">
+                        <div class="phase-icon">🌗</div>
+                        <span class="phase-label">Waning</span>
+                        <small>Release</small>
+                    </div>
+                </div>
+                
+                <!-- Phase Content Sections -->
+                <div class="phase-content active" id="new-moon-content">
+                    <h3 class="phase-content-title">New Moon: Time for Reflection</h3>
+                    <p class="phase-content-desc">The New Moon represents new beginnings and fresh starts. This is an ideal time for introspection, setting intentions, and planting seeds for what you want to grow in your life.</p>
+                    <div class="phase-content-tips">
+                        <h4>New Moon Wellness Practices:</h4>
+                        <ul>
+                            <li>Journal about your goals and aspirations</li>
+                            <li>Practice meditation to connect with your inner self</li>
+                            <li>Create a sacred space for quiet contemplation</li>
+                            <li>Set intentions for the coming lunar cycle</li>
+                            <li>Engage in gentle yoga or stretching</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="phase-content" id="waxing-content">
+                    <h3 class="phase-content-title">Waxing Moon: Cultivate Growth</h3>
+                    <p class="phase-content-desc">As the moon grows in the sky, it's time to nurture your intentions. This phase supports taking action, building momentum, and developing new habits.</p>
+                    <div class="phase-content-tips">
+                        <h4>Waxing Moon Wellness Practices:</h4>
+                        <ul>
+                            <li>Take small steps toward your goals each day</li>
+                            <li>Practice gratitude for the growth you're experiencing</li>
+                            <li>Engage in activities that build your energy</li>
+                            <li>Connect with supportive people in your life</li>
+                            <li>Try new things that align with your intentions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="phase-content" id="full-moon-content">
+                    <h3 class="phase-content-title">Full Moon: Embrace Clarity</h3>
+                    <p class="phase-content-desc">The Full Moon illuminates what needs to be seen. This is a powerful time for revelation, celebration, and releasing what no longer serves you.</p>
+                    <div class="phase-content-tips">
+                        <h4>Full Moon Wellness Practices:</h4>
+                        <ul>
+                            <li>Practice moon gazing or nighttime meditation</li>
+                            <li>Celebrate your progress and achievements</li>
+                            <li>Release negative thoughts or habits through ritual</li>
+                            <li>Connect with others in meaningful ways</li>
+                            <li>Express your creativity through art or writing</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="phase-content" id="waning-content">
+                    <h3 class="phase-content-title">Waning Moon: Letting Go</h3>
+                    <p class="phase-content-desc">As the moon decreases in light, it's time to release, rest, and reflect. This phase supports closure, forgiveness, and preparing for renewal.</p>
+                    <div class="phase-content-tips">
+                        <h4>Waning Moon Wellness Practices:</h4>
+                        <ul>
+                            <li>Practice forgiveness (of self and others)</li>
+                            <li>Declutter your physical and mental spaces</li>
+                            <li>Engage in restorative activities like baths or gentle walks</li>
+                            <li>Reflect on lessons learned during this cycle</li>
+                            <li>Prepare for the new beginnings of the next New Moon</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;" class="fade-in delay-1">
+                    <a href="#" class="btn btn-primary" id="current-phase-btn">Discover Your Current Phase</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Resources Page -->
+    <div class="page" id="resources-page">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Starlight Resources</h2>
+                <p class="section-subtitle fade-in delay-1">Guided by the cosmos to support your mental wellness journey</p>
+                
+                <div class="resources-grid" id="resources-container">
+                    <!-- Resources will be loaded here from JSON -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Community Page -->
+    <div class="page" id="community-page">
+        <section class="section" style="background-color: var(--lavender);">
+            <div class="container">
+                <h2 class="section-title fade-in">Cosmic Community</h2>
+                <p class="section-subtitle fade-in delay-1">Connect with others on similar lunar journeys</p>
+                
+                <div class="community-form fade-in delay-2">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem;">Share Your Moon Wisdom</h3>
+                    <form id="post-form">
+                        <div class="form-group">
+                            <label for="post-name">Name (or cosmic alias)</label>
+                            <input type="text" id="post-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="post-content">Your Message</label>
+                            <textarea id="post-content" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post to the Cosmos</button>
+                    </form>
+                </div>
+                
+                <div class="community-posts" id="community-posts">
+                    <!-- Posts will be loaded here -->
+                    <div class="post fade-in">
+                        <div class="post-header">
+                            <div class="post-avatar">🌙</div>
+                            <div>
+                                <div class="post-user">Stella Luna</div>
+                                <div class="post-date">3 days ago during Waxing Moon</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            The waxing moon energy has been incredible for my meditation practice! I've been waking up 15 minutes earlier each day to sit with my intentions. Anyone else feeling this growth energy?
+                        </div>
+                        <div class="post-actions">
+                            <div class="post-action">✨ 12</div>
+                            <div class="post-action">💬 4</div>
+                            <div class="post-action">🔄 Share</div>
+                        </div>
+                    </div>
+                    
+                    <div class="post fade-in delay-1">
+                        <div class="post-header">
+                            <div class="post-avatar">🌕</div>
+                            <div>
+                                <div class="post-user">Moon Child</div>
+                                <div class="post-date">1 week ago during Full Moon</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Full moon cleansing ritual: I wrote down all my worries on paper and burned them safely in a fireproof bowl. The release was so powerful! What are your favorite full moon release practices?
+                        </div>
+                        <div class="post-actions">
+                            <div class="post-action">✨ 24</div>
+                            <div class="post-action">💬 8</div>
+                            <div class="post-action">🔄 Share</div>
                         </div>
                     </div>
                 </div>
-                <div class="hero-image fade-in delay-2">
-                    <div class="moon-visual"></div>
-                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="section features">
-        <div class="container">
-            <h2 class="section-title fade-in">Celestial Guidance</h2>
-            <p class="section-subtitle fade-in delay-1">Harness the moon's energy to navigate your mental health journey</p>
-            
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🌙</div>
-                    <h3 class="feature-title">Lunar Wisdom</h3>
-                    <p class="feature-desc">Discover how moon phases mirror emotional cycles and learn to work with their energy.</p>
-                </div>
-                
-                <div class="feature-card fade-in delay-1">
-                    <div class="feature-icon">✨</div>
-                    <h3 class="feature-title">Starlight Strategies</h3>
-                    <p class="feature-desc">Evidence-based techniques framed through celestial metaphors for better recall.</p>
-                </div>
-                
-                <div class="feature-card fade-in delay-2">
-                    <div class="feature-icon">🌌</div>
-                    <h3 class="feature-title">Cosmic Connections</h3>
-                    <p class="feature-desc">A supportive community that orbits together through life's challenges.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Moon Phases Section -->
-    <section class="section" id="phases" style="background-color: var(--lavender);">
-        <div class="container">
-            <h2 class="section-title fade-in">Moon Phase Guidance</h2>
-            <p class="section-subtitle fade-in delay-1">Your emotional journey through the lunar cycle</p>
-            
-            <div class="phases-nav fade-in delay-2">
-                <div class="phase-link active">
-                    <div class="phase-icon">🌑</div>
-                    <span class="phase-label">New Moon</span>
-                    <small>Reflection</small>
-                </div>
-                <div class="phase-link">
-                    <div class="phase-icon">🌓</div>
-                    <span class="phase-label">Waxing</span>
-                    <small>Growth</small>
-                </div>
-                <div class="phase-link">
-                    <div class="phase-icon">🌕</div>
-                    <span class="phase-label">Full Moon</span>
-                    <small>Clarity</small>
-                </div>
-                <div class="phase-link">
-                    <div class="phase-icon">🌗</div>
-                    <span class="phase-label">Waning</span>
-                    <small>Release</small>
-                </div>
-            </div>
-            
-            <div style="text-align: center;" class="fade-in delay-1">
-                <a href="#" class="btn btn-primary">Discover Your Current Phase</a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <!-- JavaScript -->
     <script>
-        // Create stars
+        // App Data
+        const appData = {
+            currentPhase: 'full-moon',
+            resources: [
+                {
+                    id: 1,
+                    title: "Lunar Meditation Guide",
+                    category: "Meditation",
+                    description: "A 28-day guided meditation program aligned with moon phases to enhance emotional awareness and inner peace.",
+                    image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                },
+                {
+                    id: 2,
+                    title: "Moon Journal Prompts",
+                    category: "Journaling",
+                    description: "300 thought-provoking questions organized by moon phase to deepen your self-reflection practice.",
+                    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                },
+                {
+                    id: 3,
+                    title: "Celestial Sleep Sounds",
+                    category: "Sleep",
+                    description: "Soothing audio tracks combining binaural beats with lunar cycle frequencies for better sleep.",
+                    image: "https://images.unsplash.com/photo-1518630382449-939317a0e6d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                },
+                {
+                    id: 4,
+                    title: "Moon Phase Yoga Flow",
+                    category: "Movement",
+                    description: "Yoga sequences designed to align with each moon phase's unique energy signature.",
+                    image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                },
+                {
+                    id: 5,
+                    title: "Cosmic Affirmation Cards",
+                    category: "Mindset",
+                    description: "64 beautifully illustrated cards with affirmations for each moon phase and zodiac season.",
+                    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                },
+                {
+                    id: 6,
+                    title: "Lunar Cycle Nutrition Guide",
+                    category: "Nutrition",
+                    description: "Meal plans and recipes that support your body's needs through the moon's phases.",
+                    image: "https://images.unsplash.com/photo-1518630382449-939317a0e6d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                }
+            ],
+            posts: [
+                {
+                    id: 1,
+                    user: "Stella Luna",
+                    avatar: "🌙",
+                    date: "3 days ago during Waxing Moon",
+                    content: "The waxing moon energy has been incredible for my meditation practice! I've been waking up 15 minutes earlier each day to sit with my intentions. Anyone else feeling this growth energy?",
+                    likes: 12,
+                    comments: 4
+                },
+                {
+                    id: 2,
+                    user: "Moon Child",
+                    avatar: "🌕",
+                    date: "1 week ago during Full Moon",
+                    content: "Full moon cleansing ritual: I wrote down all my worries on paper and burned them safely in a fireproof bowl. The release was so powerful! What are your favorite full moon release practices?",
+                    likes: 24,
+                    comments: 8
+                }
+            ]
+        };
+
+        // DOM Elements
+        const pages = {
+            home: document.getElementById('home-page'),
+            phases: document.getElementById('phases-page'),
+            resources: document.getElementById('resources-page'),
+            community: document.getElementById('community-page')
+        };
+
+        // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
+            // Create stars
+            createStars();
+            
+            // Set up navigation
+            setupNavigation();
+            
+            // Set up mood selector
+            setupMoodSelector();
+            
+            // Set up phase navigation
+            setupPhaseNavigation();
+            
+            // Load resources
+            loadResources();
+            
+            // Set up community form
+            setupCommunityForm();
+            
+            // Set current phase button
+            setupCurrentPhaseButton();
+            
+            // Show home page by default
+            showPage('home');
+            
+            // Set up intersection observer for animations
+            setupAnimations();
+        });
+
+        // Functions
+        function createStars() {
             const starsContainer = document.getElementById('stars-container');
             const starCount = 100;
             
@@ -795,7 +1250,9 @@
                 
                 starsContainer.appendChild(star);
             }
-            
+        }
+
+        function setupNavigation() {
             // Mobile menu toggle
             const menuBtn = document.querySelector('.mobile-menu-btn');
             const navLinks = document.querySelector('.nav-links');
@@ -805,7 +1262,55 @@
                 menuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☾';
             });
             
-            // Mood selector
+            // Page navigation
+            const navLinksAll = document.querySelectorAll('.nav-link');
+            navLinksAll.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    showPage(page);
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                    menuBtn.textContent = '☾';
+                });
+            });
+            
+            // Home logo link
+            document.getElementById('home-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                showPage('home');
+            });
+        }
+
+        function showPage(pageName) {
+            // Hide all pages
+            Object.values(pages).forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            pages[pageName].classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Update active nav link
+            updateActiveNavLink(pageName);
+        }
+
+        function updateActiveNavLink(pageName) {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.dataset.page === pageName) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        function setupMoodSelector() {
             const moodOptions = document.querySelectorAll('.mood-option');
             moodOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -814,19 +1319,152 @@
                     
                     // In a real app, you would track mood selection here
                     console.log(`Mood selected: ${this.dataset.mood}`);
+                    
+                    // Show a confirmation message
+                    const moods = {
+                        'new-moon': 'New Moon - A time for reflection and new beginnings',
+                        'waxing': 'Waxing Moon - Energy for growth and action',
+                        'full': 'Full Moon - Clarity and illumination',
+                        'waning': 'Waning Moon - Release and letting go',
+                        'eclipse': 'Eclipse - Powerful transformation energy'
+                    };
+                    
+                    alert(`You've selected: ${moods[this.dataset.mood]}`);
                 });
             });
-            
-            // Phase navigation
+        }
+
+        function setupPhaseNavigation() {
             const phaseLinks = document.querySelectorAll('.phase-link');
+            const phaseContents = document.querySelectorAll('.phase-content');
+            
             phaseLinks.forEach(link => {
                 link.addEventListener('click', function() {
+                    const phase = this.dataset.phase;
+                    
+                    // Update active phase link
                     phaseLinks.forEach(l => l.classList.remove('active'));
                     this.classList.add('active');
+                    
+                    // Show corresponding content
+                    phaseContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${phase}-content`) {
+                            content.classList.add('active');
+                        }
+                    });
                 });
             });
+        }
+
+        function loadResources() {
+            const resourcesContainer = document.getElementById('resources-container');
             
-            // Animate elements when they come into view
+            appData.resources.forEach(resource => {
+                const resourceCard = document.createElement('div');
+                resourceCard.className = 'resource-card fade-in';
+                resourceCard.innerHTML = `
+                    <div class="resource-image" style="background-image: url('${resource.image}')"></div>
+                    <div class="resource-content">
+                        <span class="resource-category">${resource.category}</span>
+                        <h3 class="resource-title">${resource.title}</h3>
+                        <p class="resource-desc">${resource.description}</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                `;
+                
+                resourcesContainer.appendChild(resourceCard);
+            });
+        }
+
+        function setupCommunityForm() {
+            const form = document.getElementById('post-form');
+            const postsContainer = document.getElementById('community-posts');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('post-name').value;
+                const content = document.getElementById('post-content').value;
+                
+                if (name && content) {
+                    // Create new post
+                    const newPost = {
+                        id: appData.posts.length + 1,
+                        user: name,
+                        avatar: '🌙',
+                        date: 'Just now',
+                        content: content,
+                        likes: 0,
+                        comments: 0
+                    };
+                    
+                    // Add to data
+                    appData.posts.unshift(newPost);
+                    
+                    // Create post element
+                    const postElement = document.createElement('div');
+                    postElement.className = 'post fade-in';
+                    postElement.innerHTML = `
+                        <div class="post-header">
+                            <div class="post-avatar">${newPost.avatar}</div>
+                            <div>
+                                <div class="post-user">${newPost.user}</div>
+                                <div class="post-date">${newPost.date}</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            ${newPost.content}
+                        </div>
+                        <div class="post-actions">
+                            <div class="post-action">✨ ${newPost.likes}</div>
+                            <div class="post-action">💬 ${newPost.comments}</div>
+                            <div class="post-action">🔄 Share</div>
+                        </div>
+                    `;
+                    
+                    // Insert at the top
+                    postsContainer.insertBefore(postElement, postsContainer.firstChild);
+                    
+                    // Reset form
+                    form.reset();
+                    
+                    // Show success message
+                    alert('Your post has been shared with the cosmic community!');
+                }
+            });
+        }
+
+        function setupCurrentPhaseButton() {
+            const btn = document.getElementById('current-phase-btn');
+            
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // In a real app, this would calculate the actual current moon phase
+                const phases = {
+                    'new-moon': 'New Moon',
+                    'waxing': 'Waxing Moon',
+                    'full-moon': 'Full Moon',
+                    'waning': 'Waning Moon'
+                };
+                
+                alert(`Based on your location and the current date, you're in the ${phases[appData.currentPhase]} phase. This is a time for ${getPhaseDescription(appData.currentPhase)}.`);
+            });
+        }
+
+        function getPhaseDescription(phase) {
+            const descriptions = {
+                'new-moon': 'reflection and setting new intentions',
+                'waxing': 'growth and taking action',
+                'full-moon': 'clarity and releasing what no longer serves you',
+                'waning': 'letting go and preparing for renewal'
+            };
+            
+            return descriptions[phase] || 'connecting with lunar energy';
+        }
+
+        function setupAnimations() {
             const fadeElements = document.querySelectorAll('.fade-in');
             
             const observer = new IntersectionObserver((entries) => {
@@ -844,7 +1482,7 @@
                 el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(el);
             });
-        });
+        }
     </script>
 </body>
 </html>
